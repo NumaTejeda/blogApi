@@ -3,6 +3,7 @@
 import { sequelize_db } from'./config/sqlite_db.js'
 import { Post } from'./models/Post.js';   
 
+// console.clear()
 (async ()=> {
     try{
         await sequelize_db.authenticate();
