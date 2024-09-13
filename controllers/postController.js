@@ -19,6 +19,18 @@ export const managerPost = {
             console.log(error);
         }
     },
+    getPostById: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const post = await Post.findByPk(id);
+
+            if(!post) return res.status(404).send({ message:'Post not found' });
+
+            res.status(200).send({ post});
+        } catch (error) {
+            console.log(error)
+        }
+    },
     updatePost: async (req, res) =>{
         try {
             const id = req.params.id;
@@ -28,7 +40,7 @@ export const managerPost = {
             if(!post){
                 return res.status(404).send({message: 'Post not found'});
             }
-            
+
             await post.update({
                 title: title || post.title,
                 content: content || post.content,
@@ -37,7 +49,7 @@ export const managerPost = {
             })
             return res.status(200).send({message: 'Post actualizado.' })
         } catch (error) {
-            console.log(error);
+            res.status(400).send({message: 'Pust not upadte', error: error})
         }
     },
     deletePost: async (res, req) =>{
