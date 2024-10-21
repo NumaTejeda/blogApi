@@ -1,7 +1,7 @@
-//Sincronizar modelo con base de datos
 
 import { sequelize_db } from'./sqlite_db.js'
 
+//Sincronizar modelo con base de datos
 (async ()=> {
     try{
         await sequelize_db.authenticate();

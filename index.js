@@ -9,7 +9,7 @@ import path from 'path';
 console.clear()
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const port = 3100;
+const port = process.env.PORT || 3100;
 
 const app = express(); 
 
@@ -18,6 +18,7 @@ app.use(cookieParser());
 
 // Middleware para servir archivos estaticos
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 //Middleware para parsear el cuerpo de la solicitud
 app.use(bodyParser.json())

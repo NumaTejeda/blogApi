@@ -10,10 +10,43 @@
 <body>
     <h1>Hola</h1>
 
-    <form action="/api/images/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" />
+    <form action="/api/images/upload" method="POST" enctype="multipart/form-data" id="form">
+        <input type="file" name="image" id="image" />
+        <hr />
+        <label for="title">Titulo: </label>
+        <input type="text" name="title" id="title">
+        <hr />
         <button type="submit">Subir Imagen</button>
     </form>
+    <script>
+        const formUploadImage = document.querySelector('#form');
+
+        formUploadImage.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+
+            const formData = new FormData(formUploadImage);
+
+
+            try {
+                const respuesta = await fetch('api/v1/uploadImage', {
+                    method: "POST",
+                    // headers: multipartFormData lo pone solito 
+                    body: formData
+                })
+
+                try {
+                    const result = await respuesta.json()
+                    console.log(result)
+                } catch (error) {
+                    console.log(error)
+                }
+
+            } catch (error) {
+                console.log(error);
+            }
+        })
+    </script>
 </body>
 
 </html>

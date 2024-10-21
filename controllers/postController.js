@@ -1,5 +1,8 @@
 import { Post } from '../models/Post.js';
 
+
+//CRUD de posts.
+
 export const managerPost = {
     addPost: async (req, res)=>{
         try {
@@ -55,7 +58,7 @@ export const managerPost = {
     deletePost: async (res, req) =>{
         try {
             const id = await res.params.id;
-            const result = await Post.destroy({
+            await Post.destroy({
                 where: {id}
             })
             return req.status(200).send({message: `Posteo con id: ${id} ELIMINADO CON EXITO`}); // True si elimino registro

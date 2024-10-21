@@ -1,5 +1,8 @@
 import { v2 as cloudinary } from 'cloudinary';
 
+
+
+//Configuracion de cloudinary
 cloudinary.config({ 
     cloud_name: 'dk6dhewrv', 
     api_key: '763273593289275', 

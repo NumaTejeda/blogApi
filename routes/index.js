@@ -5,12 +5,7 @@ const router = express.Router()
 
 router.use('/api/v1/', postsRoutes);
 router.use('/api/v1/', imageRoutes)
-// router.use('/api/v1/', imageRoutes);
 
 export default router;
-
- 
-
-
 
 //router.use('/api/v1/auth', authRoutes)

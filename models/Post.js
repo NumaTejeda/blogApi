@@ -1,6 +1,8 @@
 import  { DataTypes } from 'sequelize'
 import { sequelize_db } from '../config/sqlite_db.js'
 
+//Modelo/estructura base de datos del post.
+
 export const Post = sequelize_db.define('Post', {
     title: {
         type: DataTypes.STRING(30),
@@ -13,7 +15,7 @@ export const Post = sequelize_db.define('Post', {
     },
     content: {
         type: DataTypes.TEXT,
-        alowwNull: false
+        alowNull: false
     },
     mg: {
         type: DataTypes.INTEGER,
