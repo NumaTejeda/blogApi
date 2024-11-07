@@ -29,7 +29,7 @@ app.set('view engine', 'ejs');
 
 // Configurar el directorio donde están las vistas
 app.set('views', path.join(__dirname, 'views'));
-
+    
 // Ruta para renderizar la vista dasboards.ejs
 app.get('/dashboard', (req, res) => {
     res.render('dashboard', { nombre: 'Mundo' });
