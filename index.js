@@ -12,7 +12,6 @@ const __dirname = dirname(__filename);
 const port = process.env.PORT || 3100;
 
 const app = express(); 
-
 // Middleware para manejar cookies
 app.use(cookieParser());
 
@@ -33,6 +32,9 @@ app.set('views', path.join(__dirname, 'views'));
 // Ruta para renderizar la vista dasboards.ejs
 app.get('/dashboard', (req, res) => {
     res.render('dashboard', { nombre: 'Mundo' });
+});
+app.get('/imagenes', (req, res) => {
+    res.render('lienzo');
 });
 
 app.use('/', routes)

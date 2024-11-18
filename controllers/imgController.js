@@ -10,11 +10,12 @@
 export const controllerImage = {
     printUrl: async (req, res)=>{
         try{
-            // console.log(req.urlImage)
             // console.log(req.publicId)
             // console.log(req.postId)
 
-            res.status(200).send({message: 'Imagen subida'});
+            const secureURL = req.url;
+
+            res.status(200).send({message: 'Imagen subida', url: secureURL});
         }catch(e){
             console.log(e)
         }

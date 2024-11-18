@@ -14,7 +14,7 @@ export const managerImage = {
                 return res.status(400).send({ message: 'No se ha recibido ningún archivo.' });
             }
 
-            const uploadResult = await new Promise((resolve, reject)=>{
+            const uploadResult = await new Promise((resolve, reject) => {
                 const stream = cloudinary.uploader.upload_stream(
                     {
                         resource_type: 'image',
@@ -28,12 +28,12 @@ export const managerImage = {
                         }
                     }
                 );
-                
+
                 stream.end(file.buffer);
             })
             console.log(uploadResult)
             req.url = uploadResult.secure_url;
-            
+
             next()
         } catch (e) {
             console.log(e)
@@ -42,42 +42,38 @@ export const managerImage = {
     },
 
 
-    //! No anda
     getAllImage: async (req, res) => {
-        // try {
-        //     const images = await cloudinary.api.resource({
-        //         type: 'upload', // Tipo de recurso que quieres obtener
-        //         prefix: '', // Puedes agregar un prefijo si necesitas filtrar por un grupo específico
-        //         max_results: 30, // Número máximo de resultados a obtener
-        //     })
-        //     console.log(images);
-        // } catch (error) {
-        //     console.error(error);
-        // }
-        // console.log(images)
-        
-        //! para traer de a uno por el public_id
-        // try {
-            //     const image = cloudinary.url('shoes');
-            
-            //     res.status(200).json({ image }  )
-            // } catch (error) {
-                //     console.log(error);
-                // }
-                
-                
-        
-        //! Tampoco anda 
-        // ? Consultar en Admin API Cloudinary
-        const options = { resource_type:"image", max_results: 500}
-        
+        const options = {
+            type: 'upload',
+            max_results: 10
+        }
         try {
-            const allImages = cloudinary.api.resource(options)
-            
-            console.log(allImages)
-            res.status(200).json({allImages})
+            const dataAllImages = await cloudinary.api.resources(options);
+            console.log(dataAllImages)
+            res.status(200).json({ message: 'Uploaded images successfully', dataAllImages })
         } catch (error) {
+            console.log(error)
+        }
+        //! Falta manejo de errores y otras cuestiones
+    },
+
+    deleteImageWithId: async (req, res) => {
+        try {
+            const public_id = req.params.id;
+            //! No distingue minusculas de mayusculas
+            const deleteResponse = await cloudinary.api.delete_resources([public_id])
+            const { deleted } = deleteResponse;
+            console.log(deleted[public_id])
+            if(deleted[public_id] === "not_found"){
+                return res.status(404).json({ message: `${public_id} not found`})
+            }
             
+            return res.status(200).json({ message: 'Imagen eliminada', deleteResponse })
+        }
+        catch (error) {
+            console.log(error)
+            const { message, http_code } = error.error;
+            return res.status(400).json({ message: message, http_code: http_code })
         }
     }
 }

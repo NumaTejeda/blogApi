@@ -1,10 +1,11 @@
 
 
 const inputFile = document.querySelector('#image');
-const labelFile = document.querySelector('.custom-file-upload');
 
 
+//Animacion de archivo subido 
 inputFile.addEventListener('change', () =>{
+    const labelFile = document.querySelector('.custom-file-upload');
     const fileName = inputFile.files[0].name.slice(0, 20) + "..";
     if(inputFile.files[0]){
         labelFile.textContent = fileName;
@@ -14,6 +15,7 @@ inputFile.addEventListener('change', () =>{
 
 
 
+//Envia los datos del formulario al back donde es manejado para su subida a cloudinary
 const formUploadImage = document.querySelector('#form');
 
 formUploadImage.addEventListener('submit', async (event) => {
@@ -26,7 +28,6 @@ formUploadImage.addEventListener('submit', async (event) => {
             // headers: multipartFormData lo pone solito 
             body: formData
         })
-
         try {
             const result = await respuesta.json()
             console.log(result)
@@ -38,3 +39,6 @@ formUploadImage.addEventListener('submit', async (event) => {
         console.log(error);
     }
 })
+
+
+
