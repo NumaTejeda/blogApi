@@ -60,7 +60,7 @@ export const managerImage = {
     deleteImageWithId: async (req, res) => {
         try {
             const public_id = req.params.id;
-            //! No distingue minusculas de mayusculas
+            //! No distingue minusculas de mayusculas use toLowerCase()
             const deleteResponse = await cloudinary.api.delete_resources([public_id])
             const { deleted } = deleteResponse;
             console.log(deleted[public_id])
@@ -75,5 +75,9 @@ export const managerImage = {
             const { message, http_code } = error.error;
             return res.status(400).json({ message: message, http_code: http_code })
         }
+    },
+
+    updateImageWithId: async (req, res) => {
+        const updateImage = await cloudinary.api.update(public_id, options);
     }
 }

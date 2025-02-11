@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!--Styles-->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sube tu Imagen</h1>
+        <form action="/api/images/upload" method="POST" enctype="multipart/form-data" id="form">
+            <div class="form-group">
+                <label for="image" class="custom-file-upload">
+                    Seleccionar Imagen
+                </label>
+                <input type="file" name="image" id="image" />
+            </div>
+            <hr />
+            <div class="form-group">
+                <label for="title">Título:</label>
+                <input type="text" name="title" id="title" placeholder="Escribe el título aquí" />
+            </div>
+            <hr />
+            <button type="submit">Subir Imagen</button>
+        </form>
+    </div>
+    <script src="/js/index.js"></script>
+</body>
+
+</html>

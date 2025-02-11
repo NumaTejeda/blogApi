@@ -2,7 +2,6 @@ const reloadButton = document.getElementById('reload-button')
 const fetchPictures = async ()=>{
     const containerImage = document.getElementById('view-pictures');
 
-
     if(containerImage.hasChildNodes()){
        while(containerImage.firstChild){
         containerImage.removeChild(containerImage.firstChild);
@@ -14,12 +13,12 @@ const fetchPictures = async ()=>{
     const { message, dataAllImages} = await respuesta.json();
     const images = dataAllImages.resources;
     images.forEach(item => {
+        let div = document.createElement('div');
         let img = document.createElement('img');
         img.src = item.secure_url;
-        img.alt = item.public_id || 'Image';
         img.style.maargin = '5px';
-        img.id = item.asset_id;
-
+        img.id = item.public_id;
+        img.classList.add('cloudImg');
         containerImage.appendChild(img)
     });
     
